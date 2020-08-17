@@ -37,9 +37,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   voucherLogo: {
-    marginTop: "25px",
-    width: "150px",
-    height: "150px",
+    marginTop: 25,
+    width: 150,
+    height: 150,
   },
   voucherTitle: {
     color: "white",
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   },
   voucherSubTitle: {
     color: "grey",
-    fontSize: "17px",
+    fontSize: 17,
     opacity: 0.75,
   },
   backgroundImage: {
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   buttonContainer: {
-    marginTop: "50px",
+    marginTop: 50,
     flexDirection: "row",
     maxHeight: 200,
   },
