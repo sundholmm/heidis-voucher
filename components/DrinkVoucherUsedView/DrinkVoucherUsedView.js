@@ -9,6 +9,7 @@ const DrinkVoucherUsedView = () => {
       <ImageBackground
         source={require("../../assets/heidis-voucher-background.jpeg")}
         style={styles.backgroundImage}
+        resizeMode="cover"
       >
         <Text style={styles.voucherTitle}>Drink voucher</Text>
         <Text style={styles.voucherSubTitle}>Heidi's Bier Bar Turku</Text>
@@ -53,6 +54,8 @@ const styles = StyleSheet.create({
   },
   backgroundImage: {
     flex: 1,
+    width: "100%",
+    height: "100%",
     alignItems: "center",
     justifyContent: "center",
   },
