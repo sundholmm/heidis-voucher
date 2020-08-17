@@ -1,10 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import DrinkVoucherUsedView from './components/DrinkVoucherUsedView/DrinkVoucherUsedView';
+import DrinkVoucherView from './components/DrinkVoucherView/DrinkVoucherView';
 
-export default App = () => {
+const App = () => {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <DrinkVoucherUsedView />
+      {/* <DrinkVoucherView /> */}
     </View>
   );
 }
@@ -17,3 +20,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+export default App;
