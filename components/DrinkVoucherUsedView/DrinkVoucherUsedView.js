@@ -1,31 +1,30 @@
 import React from "react";
-import { StyleSheet, Text, View, ImageBackground, Image } from "react-native";
+import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
-const DrinkVoucherUsedView = () => {
+const DrinkVoucherUsedView = (props) => {
+  const { setUsed } = props;
   return (
     <View style={styles.container}>
-      <ImageBackground
-        source={require("../../assets/heidis-voucher-background.jpeg")}
-        style={styles.backgroundImage}
-        resizeMode="cover"
-      >
-        <Text style={styles.voucherTitle}>Drink voucher</Text>
-        <Text style={styles.voucherSubTitle}>Heidi's Bier Bar Turku</Text>
-        <Image
-          source={require("../../assets/heidis-voucher.jpeg")}
-          style={styles.voucherLogo}
-        />
-        <View style={styles.iconBorder}>
-          <FontAwesomeIcon color="#00FA9A" icon={faCheck} />
-        </View>
-        <Text style={styles.text}>Perk used successfully!</Text>
-        <View style={styles.buttonContainer}>
+      <Text style={styles.voucherTitle}>Drink voucher</Text>
+      <Text style={styles.voucherSubTitle}>Heidi's Bier Bar Turku</Text>
+      <Image
+        source={require("../../assets/heidis-voucher.jpeg")}
+        style={styles.voucherLogo}
+      />
+      <View style={styles.iconBorder}>
+        <FontAwesomeIcon color="#00FA9A" icon={faCheck} />
+      </View>
+      <Text style={styles.text}>Perk used successfully!</Text>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity onPress={() => setUsed(false)}>
           <Text style={styles.dismissBorder}>Dismiss</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => setUsed(false)}>
           <Text style={styles.useAgainBorder}>Use again</Text>
-        </View>
-      </ImageBackground>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -33,7 +32,6 @@ const DrinkVoucherUsedView = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -51,13 +49,6 @@ const styles = StyleSheet.create({
     color: "grey",
     fontSize: 17,
     opacity: 0.75,
-  },
-  backgroundImage: {
-    flex: 1,
-    width: "100%",
-    height: "100%",
-    alignItems: "center",
-    justifyContent: "center",
   },
   iconBorder: {
     margin: 16,

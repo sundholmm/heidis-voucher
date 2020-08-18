@@ -1,34 +1,39 @@
-import React from 'react';
+import React from "react";
 import Slider from "react-native-slider";
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from "react-native";
 
-const DrinkVoucherView = () => {
+const DrinkVoucherView = (props) => {
+  const { setUsed } = props;
   return (
     <View style={styles.container}>
-        <View style={styles.slider}>
-            <Slider
-            //   value={this.state.value}
-            //   onValueChange={value => this.setState({ value })}
-            />
-        </View>
+      <View style={styles.slider}>
+        <Slider
+          onSlidingComplete={() => setUsed(true)}
+          thumbImage={require("../../assets/nyx_logo.png")}
+          thumbStyle={styles.thumb}
+        />
+      </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   slider: {
-    flex: 1,
-    marginLeft: 10,
-    marginRight: 10,
-    alignItems: 'stretch',
-    justifyContent: 'center'
-  }
+    width: 150,
+  },
+  thumb: {
+    // width: 30,
+    // height: 30,
+    // shadowColor: "black",
+    // shadowOffset: { width: 0, height: 1 },
+    // shadowOpacity: 0.5,
+    // shadowRadius: 1,
+  },
 });
 
 export default DrinkVoucherView;
