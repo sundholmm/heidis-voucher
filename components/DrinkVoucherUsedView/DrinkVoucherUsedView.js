@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
@@ -7,12 +7,6 @@ const DrinkVoucherUsedView = (props) => {
   const { setUsed } = props;
   return (
     <View style={styles.container}>
-      <Text style={styles.voucherTitle}>Drink voucher</Text>
-      <Text style={styles.voucherSubTitle}>Heidi's Bier Bar Turku</Text>
-      <Image
-        source={require("../../assets/heidis-voucher.jpeg")}
-        style={styles.voucherLogo}
-      />
       <View style={styles.iconBorder}>
         <FontAwesomeIcon color="#00FA9A" icon={faCheck} />
       </View>
@@ -34,21 +28,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-  },
-  voucherLogo: {
-    marginTop: 25,
-    width: 150,
-    height: 150,
-  },
-  voucherTitle: {
-    color: "white",
-    fontWeight: "bold",
-    fontSize: 20,
-  },
-  voucherSubTitle: {
-    color: "grey",
-    fontSize: 17,
-    opacity: 0.75,
   },
   iconBorder: {
     margin: 16,
