@@ -6,7 +6,7 @@ import DrinkVoucherView from "./components/DrinkVoucherView/DrinkVoucherView";
 
 const App = () => {
   const [used, setUsed] = useState(false);
-
+  const drinkVoucher = "Drink voucher";
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -15,7 +15,7 @@ const App = () => {
         resizeMode="cover"
       >
         <View style={styles.logoView}>
-          <Text style={styles.voucherTitle}>Drink voucher</Text>
+          <Text style={styles.voucherTitle}>{drinkVoucher}</Text>
           <Text style={styles.voucherSubTitle}>Heidi's Bier Bar Turku</Text>
           <Image
             source={require("./assets/heidis-voucher.jpeg")}

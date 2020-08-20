@@ -73,12 +73,12 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "#FF4D6F",
     width: 300,
-    borderRadius: 500,
+    borderRadius: 1000,
   },
   draggableImage: {
     height: 50,
     width: 50,
-    borderRadius: 500,
+    borderRadius: 1000,
   },
   usesLeftText: {
     fontSize: 16,
