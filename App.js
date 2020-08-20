@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   logoView: {
     flex: 3,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-end",
   },
   voucherInfoView: {
     height: 50,
