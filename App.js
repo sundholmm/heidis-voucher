@@ -14,15 +14,21 @@ const App = () => {
         style={styles.backgroundImage}
         resizeMode="cover"
       >
-        <View style={styles.titleView}>
+        <View style={styles.logoView}>
           <Text style={styles.voucherTitle}>Drink voucher</Text>
           <Text style={styles.voucherSubTitle}>Heidi's Bier Bar Turku</Text>
-        </View>
-        <View style={styles.logoView}>
           <Image
             source={require("./assets/heidis-voucher.jpeg")}
             style={styles.voucherLogo}
           />
+          <View style={styles.voucherInfoView}>
+            {!used && (
+              <Text style={styles.voucherInfo}>
+                This voucher gives you a draught Koff, Kelkka, Valkovenäläinen
+                or Kossu+mix(excl. Red Bull) to 3 {"\u20AC"}
+              </Text>
+            )}
+          </View>
         </View>
         <View style={styles.changingView}>
           {!used ? (
@@ -42,13 +48,20 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
   },
-  titleView: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
   logoView: {
-    flex: 2,
+    flex: 3,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  voucherInfoView: {
+    height: 50,
+  },
+  voucherInfo: {
+    color: "white",
+    width: 240,
+    fontSize: 12,
+    textAlign: "center",
+    marginTop: 20,
   },
   changingView: {
     flex: 3,
