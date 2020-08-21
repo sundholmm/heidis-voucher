@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, Image, ImageBackground } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import DrinkVoucherUsedView from "./components/DrinkVoucherUsedView/DrinkVoucherUsedView";
 import DrinkVoucherView from "./components/DrinkVoucherView/DrinkVoucherView";
+import FadeInView from "./components/FadeInView/FadeInView";
 
 const App = () => {
   const [used, setUsed] = useState(false);
@@ -34,9 +35,12 @@ const App = () => {
           {!used ? (
             <DrinkVoucherView setUsed={setUsed} />
           ) : (
-            <DrinkVoucherUsedView setUsed={setUsed} />
+            <FadeInView>
+              <DrinkVoucherUsedView setUsed={setUsed} />
+            </FadeInView>
           )}
         </View>
+
         <StatusBar style="light" />
       </ImageBackground>
     </View>
