@@ -11,6 +11,9 @@ import {
 const DrinkVoucherView = (props) => {
   const { setUsed } = props;
   const pan = new Animated.Value(0);
+  const swipeToCancel = "Swipe down anywhere to cancel.";
+  const usesLeft = "2 uses left before 00:00";
+  const swipeToUse = "Swipe to use perk";
 
   const panResponder = useRef(
     PanResponder.create({
@@ -31,10 +34,8 @@ const DrinkVoucherView = (props) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.swipeToCancelText}>
-        Swipe down anywhere to cancel.
-      </Text>
-      <Text style={styles.usesLeftText}>2 uses left before 00:00</Text>
+      <Text style={styles.swipeToCancelText}>{swipeToCancel}</Text>
+      <Text style={styles.usesLeftText}>{usesLeft}</Text>
 
       <View style={styles.sliderBorder}>
         <Animated.View
@@ -58,7 +59,7 @@ const DrinkVoucherView = (props) => {
           />
         </Animated.View>
       </View>
-      <Text style={styles.swipeToUseText}>Swipe to use perk</Text>
+      <Text style={styles.swipeToUseText}>{swipeToUse}</Text>
     </View>
   );
 };

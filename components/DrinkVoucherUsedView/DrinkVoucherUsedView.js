@@ -6,18 +6,20 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons";
 const DrinkVoucherUsedView = (props) => {
   const { setUsed } = props;
   const perkUsed = "Perk used successfully!";
+  const dismiss = "Dismiss";
+  const useAgain = "Use again";
   return (
     <View style={styles.container}>
       <View style={styles.iconBorder}>
         <FontAwesomeIcon color="#00FA9A" icon={faCheck} />
       </View>
-      <Text style={styles.text}>{perkUsed}</Text>
+      <Text style={styles.perkUsedText}>{perkUsed}</Text>
       <View style={styles.buttonContainer}>
         <TouchableOpacity onPress={() => setUsed(false)}>
-          <Text style={styles.dismissBorder}>Dismiss</Text>
+          <Text style={styles.dismissBorder}>{dismiss}</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => setUsed(false)}>
-          <Text style={styles.useAgainBorder}>Use again</Text>
+          <Text style={styles.useAgainBorder}>{useAgain}</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -37,7 +39,7 @@ const styles = StyleSheet.create({
     borderColor: "#00FA9A",
     borderRadius: 1000,
   },
-  text: {
+  perkUsedText: {
     color: "#00FF00",
     fontWeight: "bold",
   },

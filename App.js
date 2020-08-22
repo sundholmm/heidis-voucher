@@ -8,6 +8,8 @@ import FadeInView from "./components/FadeInView/FadeInView";
 const App = () => {
   const [used, setUsed] = useState(false);
   const drinkVoucher = "Drink voucher";
+  const heidis = "Heidi's Bier Bar Turku";
+  const voucherInfo = `This voucher gives you a draught Koff, Kelkka, Valkovenäläinen or Kossu+mix(excl. Red Bull) to 3 ${"\u20AC"}`;
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -17,18 +19,13 @@ const App = () => {
       >
         <View style={styles.logoView}>
           <Text style={styles.voucherTitle}>{drinkVoucher}</Text>
-          <Text style={styles.voucherSubTitle}>Heidi's Bier Bar Turku</Text>
+          <Text style={styles.voucherSubTitle}>{heidis}</Text>
           <Image
             source={require("./assets/heidis-voucher.jpeg")}
             style={styles.voucherLogo}
           />
           <View style={styles.voucherInfoView}>
-            {!used && (
-              <Text style={styles.voucherInfo}>
-                This voucher gives you a draught Koff, Kelkka, Valkovenäläinen
-                or Kossu+mix(excl. Red Bull) to 3 {"\u20AC"}
-              </Text>
-            )}
+            {!used && <Text style={styles.voucherInfo}>{voucherInfo}</Text>}
           </View>
         </View>
         <View style={styles.changingView}>
