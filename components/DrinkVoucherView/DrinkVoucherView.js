@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
   },
   swipeToUseText: {
     fontSize: 16,
-    marginTop: -35,
+    marginTop: -38,
     color: "#FF4D6F",
   },
   swipeToCancelText: {
