@@ -74,9 +74,9 @@ const DrinkVoucherView = (props) => {
       onPanResponderGrant: () => {
         pan.setOffset(pan._value);
       },
-      onPanResponderMove: Animated.event([null, { dx: uses ? pan : 0 }]),
+      onPanResponderMove: uses && usable && Animated.event([null, { dx: pan }]),
       onPanResponderRelease: () => {
-        if (pan._value >= 246) {
+        if (!usable && pan._value >= 246) {
           setUsed(true);
           setUses(uses - 1);
         } else {
