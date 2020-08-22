@@ -7,6 +7,7 @@ import FadeInView from "./components/FadeInView/FadeInView";
 
 const App = () => {
   const [used, setUsed] = useState(false);
+  const [uses, setUses] = useState(2);
   const drinkVoucher = "Drink voucher";
   const heidis = "Heidi's Bier Bar Turku";
   const voucherInfo = `This voucher gives you a draught Koff, Kelkka, Valkovenäläinen or Kossu+mix(excl. Red Bull) to 3 ${"\u20AC"}`;
@@ -30,10 +31,10 @@ const App = () => {
         </View>
         <View style={styles.changingView}>
           {!used ? (
-            <DrinkVoucherView setUsed={setUsed} />
+            <DrinkVoucherView setUsed={setUsed} setUses={setUses} uses={uses} />
           ) : (
             <FadeInView>
-              <DrinkVoucherUsedView setUsed={setUsed} />
+              <DrinkVoucherUsedView setUsed={setUsed} uses={uses} />
             </FadeInView>
           )}
         </View>

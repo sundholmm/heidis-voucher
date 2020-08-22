@@ -4,10 +4,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 const DrinkVoucherUsedView = (props) => {
-  const { setUsed } = props;
+  const { setUsed, uses } = props;
   const perkUsed = "Perk used successfully!";
   const dismiss = "Dismiss";
   const useAgain = "Use again";
+  const availableTomorrow = "Available tomorrow";
   return (
     <View style={styles.container}>
       <View style={styles.iconBorder}>
@@ -15,12 +16,17 @@ const DrinkVoucherUsedView = (props) => {
       </View>
       <Text style={styles.perkUsedText}>{perkUsed}</Text>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity onPress={() => setUsed(false)}>
-          <Text style={styles.dismissBorder}>{dismiss}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => setUsed(false)}>
-          <Text style={styles.useAgainBorder}>{useAgain}</Text>
-        </TouchableOpacity>
+        {!uses && (
+          <Text style={styles.availableTomorrow}>{availableTomorrow}</Text>
+        )}
+        <View style={styles.innerButtonContainer}>
+          <TouchableOpacity onPress={() => setUsed(false)}>
+            <Text style={styles.dismissBorder}>{dismiss}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={uses ? () => setUsed(false) : null}>
+            <Text style={styles.useAgainBorder}>{useAgain}</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -45,8 +51,15 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     marginTop: 50,
-    flexDirection: "row",
     maxHeight: 200,
+  },
+  innerButtonContainer: {
+    flex: 1,
+    flexDirection: "row",
+  },
+  availableTomorrow: {
+    textAlign: "center",
+    color: "#C0C0C0",
   },
   dismissBorder: {
     color: "white",

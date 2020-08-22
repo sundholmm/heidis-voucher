@@ -9,10 +9,15 @@ import {
 } from "react-native";
 
 const DrinkVoucherView = (props) => {
-  const { setUsed } = props;
+  const { setUsed, setUses, uses } = props;
   const pan = new Animated.Value(0);
   const swipeToCancel = "Swipe down anywhere to cancel.";
-  const usesLeft = "2 uses left before 00:00";
+  const usesLeft =
+    uses === 2
+      ? `${uses} uses left before 00:00`
+      : uses === 1
+      ? `${uses} use left before 00:00`
+      : "Available tomorrow";
   const swipeToUse = "Swipe to use perk";
 
   const panResponder = useRef(
@@ -21,10 +26,11 @@ const DrinkVoucherView = (props) => {
       onPanResponderGrant: () => {
         pan.setOffset(pan._value);
       },
-      onPanResponderMove: Animated.event([null, { dx: pan }]),
+      onPanResponderMove: uses ? Animated.event([null, { dx: pan }]) : null,
       onPanResponderRelease: () => {
         if (pan._value >= 246) {
           setUsed(true);
+          setUses(uses - 1);
         } else {
           pan.setValue(0);
         }
@@ -36,30 +42,31 @@ const DrinkVoucherView = (props) => {
     <View style={styles.container}>
       <Text style={styles.swipeToCancelText}>{swipeToCancel}</Text>
       <Text style={styles.usesLeftText}>{usesLeft}</Text>
-
-      <View style={styles.sliderBorder}>
-        <Animated.View
-          style={{
-            transform: [
-              {
-                translateX: pan.interpolate({
-                  inputRange: [0, 246],
-                  outputRange: [0, 246],
-                  extrapolateLeft: "clamp",
-                  extrapolateRight: "clamp",
-                }),
-              },
-            ],
-          }}
-          {...panResponder.panHandlers}
-        >
-          <Image
-            style={styles.draggableImage}
-            source={require("../../assets/nyx_logo_black.png")}
-          />
-        </Animated.View>
+      <View style={!uses ? styles.sliderDisabled : null}>
+        <View style={styles.sliderBorder}>
+          <Animated.View
+            style={{
+              transform: [
+                {
+                  translateX: pan.interpolate({
+                    inputRange: [0, 246],
+                    outputRange: [0, 246],
+                    extrapolateLeft: "clamp",
+                    extrapolateRight: "clamp",
+                  }),
+                },
+              ],
+            }}
+            {...panResponder.panHandlers}
+          >
+            <Image
+              style={styles.draggableImage}
+              source={require("../../assets/nyx_logo_black.png")}
+            />
+          </Animated.View>
+        </View>
+        <Text style={styles.swipeToUseText}>{swipeToUse}</Text>
       </View>
-      <Text style={styles.swipeToUseText}>{swipeToUse}</Text>
     </View>
   );
 };
@@ -91,10 +98,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginTop: -38,
     color: "#FF4D6F",
+    textAlign: "center",
   },
   swipeToCancelText: {
     color: "white",
     marginBottom: -105,
+  },
+  sliderDisabled: {
+    opacity: 0.5,
   },
 });
 
