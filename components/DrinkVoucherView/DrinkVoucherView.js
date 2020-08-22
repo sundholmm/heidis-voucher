@@ -12,13 +12,13 @@ const DrinkVoucherView = (props) => {
   const { setUsed, setUses, uses } = props;
   const pan = new Animated.Value(0);
   const swipeToCancel = "Swipe down anywhere to cancel.";
+  const swipeToUse = "Swipe to use perk";
   const usesLeft =
     uses === 2
       ? `${uses} uses left before 00:00`
       : uses === 1
       ? `${uses} use left before 00:00`
       : "Available tomorrow";
-  const swipeToUse = "Swipe to use perk";
 
   const panResponder = useRef(
     PanResponder.create({
@@ -42,31 +42,31 @@ const DrinkVoucherView = (props) => {
     <View style={styles.container}>
       <Text style={styles.swipeToCancelText}>{swipeToCancel}</Text>
       <Text style={styles.usesLeftText}>{usesLeft}</Text>
-      <View style={!uses ? styles.sliderDisabled : null}>
-        <View style={styles.sliderBorder}>
-          <Animated.View
-            style={{
-              transform: [
-                {
-                  translateX: pan.interpolate({
-                    inputRange: [0, 246],
-                    outputRange: [0, 246],
-                    extrapolateLeft: "clamp",
-                    extrapolateRight: "clamp",
-                  }),
-                },
-              ],
-            }}
-            {...panResponder.panHandlers}
-          >
-            <Image
-              style={styles.draggableImage}
-              source={require("../../assets/nyx_logo_black.png")}
-            />
-          </Animated.View>
-        </View>
-        <Text style={styles.swipeToUseText}>{swipeToUse}</Text>
+      <View style={[styles.sliderBorder, !uses && styles.sliderDisabled]}>
+        <Animated.View
+          style={{
+            transform: [
+              {
+                translateX: pan.interpolate({
+                  inputRange: [0, 246],
+                  outputRange: [0, 246],
+                  extrapolateLeft: "clamp",
+                  extrapolateRight: "clamp",
+                }),
+              },
+            ],
+          }}
+          {...panResponder.panHandlers}
+        >
+          <Image
+            style={styles.draggableImage}
+            source={require("../../assets/nyx_logo_black.png")}
+          />
+        </Animated.View>
       </View>
+      <Text style={[styles.swipeToUseText, !uses && styles.sliderDisabled]}>
+        {swipeToUse}
+      </Text>
     </View>
   );
 };
