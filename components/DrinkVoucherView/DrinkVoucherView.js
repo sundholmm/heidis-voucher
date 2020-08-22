@@ -16,9 +16,22 @@ const DrinkVoucherView = (props) => {
   const now = new Date();
 
   const getNextMonth = () => {
-    const nextMonth = new Date();
-    nextMonth.setMonth(now.getMonth() + 1);
-    return nextMonth.toLocaleString("default", { month: "long" });
+    const monthNames = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+
+    return monthNames[now.getMonth() + 1];
   };
 
   // All the text values of the component
