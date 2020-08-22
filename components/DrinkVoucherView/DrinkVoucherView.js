@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -9,8 +9,20 @@ import {
 } from "react-native";
 
 const DrinkVoucherView = (props) => {
+  // Destructure props
   const { setUsed, setUses, uses } = props;
-  const pan = new Animated.Value(0);
+
+  // Get new current date for the helper functions
+  const now = new Date();
+
+  const getNextMonth = () => {
+    const nextMonth = new Date();
+    nextMonth.setMonth(now.getMonth() + 1);
+    return nextMonth.toLocaleString("default", { month: "long" });
+  };
+
+  // All the text values of the component
+  const usableText = `Available the 1st of ${getNextMonth()}`;
   const swipeToCancel = "Swipe down anywhere to cancel.";
   const swipeToUse = "Swipe to use perk";
   const usesLeft =
@@ -19,6 +31,29 @@ const DrinkVoucherView = (props) => {
       : uses === 1
       ? `${uses} use left before 00:00`
       : "Available tomorrow";
+
+  // State for defining if the voucher can be used this time of the week
+  const [usable, setUsable] = useState(true);
+
+  const isUsable = () => {
+    if (
+      (now.getDay() === "Friday" || "Saturday") &&
+      now.getHours() >= 20 &&
+      now.getHours() <= 23
+    ) {
+      setUsable(true);
+    } else {
+      setUsable(false);
+    }
+  };
+
+  // Check usability on mount
+  useEffect(() => {
+    isUsable();
+  });
+
+  // Track pan gesture for the slider
+  const pan = new Animated.Value(0);
 
   const panResponder = useRef(
     PanResponder.create({
@@ -41,8 +76,13 @@ const DrinkVoucherView = (props) => {
   return (
     <View style={styles.container}>
       <Text style={styles.swipeToCancelText}>{swipeToCancel}</Text>
-      <Text style={styles.usesLeftText}>{usesLeft}</Text>
-      <View style={[styles.sliderBorder, !uses && styles.sliderDisabled]}>
+      <Text style={styles.usesLeftText}>{!usable ? usableText : usesLeft}</Text>
+      <View
+        style={[
+          styles.sliderBorder,
+          (!uses || !usable) && styles.sliderDisabled,
+        ]}
+      >
         <Animated.View
           style={{
             transform: [
@@ -64,7 +104,12 @@ const DrinkVoucherView = (props) => {
           />
         </Animated.View>
       </View>
-      <Text style={[styles.swipeToUseText, !uses && styles.sliderDisabled]}>
+      <Text
+        style={[
+          styles.swipeToUseText,
+          (!uses || !usable) && styles.sliderDisabled,
+        ]}
+      >
         {swipeToUse}
       </Text>
     </View>
