@@ -6,11 +6,17 @@ import DrinkVoucherView from "./components/DrinkVoucherView/DrinkVoucherView";
 import FadeInView from "./components/FadeInView/FadeInView";
 
 const App = () => {
+  // State for defining if a voucher is used or not
   const [used, setUsed] = useState(false);
+
+  // State for tracking how many vouchers are left
   const [uses, setUses] = useState(2);
+
+  // All the text values of the component
   const drinkVoucher = "Drink voucher";
   const heidis = "Heidi's Bier Bar Turku";
   const voucherInfo = `This voucher gives you a draught Koff, Kelkka, Valkovenäläinen or Kossu+mix(excl. Red Bull) to 3 ${"\u20AC"}`;
+
   return (
     <View style={styles.container}>
       <ImageBackground

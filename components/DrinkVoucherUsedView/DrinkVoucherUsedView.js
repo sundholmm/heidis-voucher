@@ -4,11 +4,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 const DrinkVoucherUsedView = (props) => {
+  // Destructure props
   const { setUsed, uses } = props;
+
+  // All the text values of the component
   const perkUsed = "Perk used successfully!";
   const dismiss = "Dismiss";
   const useAgain = "Use again";
   const availableTomorrow = "Available tomorrow";
+
   return (
     <View style={styles.container}>
       <View style={styles.iconBorder}>
