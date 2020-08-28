@@ -2,7 +2,7 @@
   "expo": {
     "name": "Heidis Voucher",
     "icon": "./assets/nyx_logo.png",
-    "version": "1.2.2",
+    "version": "1.2.3",
     "slug": "heidis-voucher",
     "ios": {
       "bundleIdentifier": "io.sundholm.heidisvoucher",
