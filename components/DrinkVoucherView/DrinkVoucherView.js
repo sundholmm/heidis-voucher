@@ -31,7 +31,7 @@ const DrinkVoucherView = (props) => {
       "December",
     ];
 
-    return monthNames[now.getMonth() + 1];
+    return monthNames[now.getMonth() === 11 ? 0 : now.getMonth() + 1];
   };
 
   // All the text values of the component
@@ -50,7 +50,7 @@ const DrinkVoucherView = (props) => {
 
   const isUsable = () => {
     if (
-      (now.getDay() === "Friday" || "Saturday") &&
+      (now.getDay() === "Friday" || now.getDay() === "Saturday") &&
       now.getHours() >= 20 &&
       now.getHours() <= 23
     ) {
