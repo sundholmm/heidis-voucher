@@ -34,6 +34,20 @@ const DrinkVoucherView = (props) => {
     return monthNames[now.getMonth() === 11 ? 0 : now.getMonth() + 1];
   };
 
+  const getThisDay = () => {
+    const dayNames = [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday",
+    ];
+
+    return dayNames[now.getDay() - 1];
+  };
+
   // All the text values of the component
   const usableText = `Available the 1st of ${getNextMonth()}`;
   const swipeToCancel = "Swipe down anywhere to cancel.";
@@ -43,6 +57,8 @@ const DrinkVoucherView = (props) => {
       ? `${uses} uses left before 00:00`
       : uses === 1
       ? `${uses} use left before 00:00`
+      : !uses && getThisDay() === "Saturday"
+      ? usableText
       : "Available tomorrow";
 
   // State for defining if the voucher can be used this time of the week
@@ -50,7 +66,7 @@ const DrinkVoucherView = (props) => {
 
   const isUsable = () => {
     if (
-      (now.getDay() === "Friday" || now.getDay() === "Saturday") &&
+      (getThisDay() === "Friday" || getThisDay() === "Saturday") &&
       now.getHours() >= 20 &&
       now.getHours() <= 23
     ) {
@@ -76,7 +92,7 @@ const DrinkVoucherView = (props) => {
       },
       onPanResponderMove: uses && usable && Animated.event([null, { dx: pan }]),
       onPanResponderRelease: () => {
-        if (!usable && pan._value >= 246) {
+        if (usable && pan._value >= 246) {
           setUsed(true);
           setUses(uses - 1);
         } else {
