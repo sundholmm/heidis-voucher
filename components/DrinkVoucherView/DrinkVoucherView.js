@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "flex-end",
-    paddingBottom: 50,
+    paddingBottom: 75,
   },
   sliderBorder: {
     borderWidth: 2,
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
   },
   swipeToCancelText: {
     color: "white",
-    marginBottom: -105,
+    marginBottom: -115,
   },
   sliderDisabled: {
     opacity: 0.5,
