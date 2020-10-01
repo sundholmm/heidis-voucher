@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -15,6 +15,7 @@ const DrinkVoucherView = (props) => {
   // Get new current date for the helper functions
   const now = new Date();
 
+  // Get next month
   const getNextMonth = () => {
     const monthNames = [
       "January",
@@ -34,6 +35,7 @@ const DrinkVoucherView = (props) => {
     return monthNames[now.getMonth() === 11 ? 0 : now.getMonth() + 1];
   };
 
+  // Get the current day
   const getThisDay = () => {
     const dayNames = [
       "Monday",
@@ -62,18 +64,15 @@ const DrinkVoucherView = (props) => {
       : "Available tomorrow";
 
   // State for defining if the voucher can be used this time of the week
-  const [usable, setUsable] = useState(true);
+  const [usable, setUsable] = useState(false);
 
   const isUsable = () => {
     if (
       (getThisDay() === "Friday" || getThisDay() === "Saturday") &&
       now.getHours() >= 20 &&
       now.getHours() <= 23
-    ) {
+    )
       setUsable(true);
-    } else {
-      setUsable(false);
-    }
   };
 
   // Check usability on mount
@@ -84,23 +83,21 @@ const DrinkVoucherView = (props) => {
   // Track pan gesture for the slider
   const pan = new Animated.Value(0);
 
-  const panResponder = useRef(
-    PanResponder.create({
-      onMoveShouldSetPanResponder: () => true,
-      onPanResponderGrant: () => {
-        pan.setOffset(pan._value);
-      },
-      onPanResponderMove: uses && usable && Animated.event([null, { dx: pan }]),
-      onPanResponderRelease: () => {
-        if (usable && pan._value >= 246) {
-          setUsed(true);
-          setUses(uses - 1);
-        } else {
-          pan.setValue(0);
-        }
-      },
-    })
-  ).current;
+  const panResponder = PanResponder.create({
+    onMoveShouldSetPanResponder: () => true,
+    onPanResponderGrant: () => {
+      pan.setOffset(pan._value);
+    },
+    onPanResponderMove: uses && usable && Animated.event([null, { dx: pan }]),
+    onPanResponderRelease: () => {
+      if (usable && pan._value >= 246) {
+        setUsed(true);
+        setUses(uses - 1);
+      } else {
+        pan.setValue(0);
+      }
+    },
+  });
 
   return (
     <View style={styles.container}>
